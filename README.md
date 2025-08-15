@@ -1,11 +1,35 @@
 # Часть 1 - Основы
 
 <H4>Если ВМ совсем новая, то нужно установить необходимые для работы библиотеки.Тут мы просто создали группу и добавили в нее юзера, у файла $test.sh предварительно заданы права на r+x (чтение и исполнение)</H4>
-    
+    sudo apt install update -y && sudo apt install upgrade -y
+
+    sudo apt install ssh-server
+    sudo apt install ufw -y
+    sudo apt install update -y && sudo apt install upgrade -y
+
+    sudo apt install curl -y
+    sudo apt install update -y && sudo apt install upgrade -y
+
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    sudo docker run hello-world
+
     sudo addgrp dockers #создал новую группу
     sudo usermod -aG dockers lapenkoas
 
-<H4>Находясь в директории файла, необходимо прописать </H4>
+<H4>Находясь в директории файла, необходимо прописать команды </H4>
     
     sudo chgrp dockers test.sh
     sudo chmod  u=rwx,g=rx test.sh 

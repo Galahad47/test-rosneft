@@ -1,8 +1,13 @@
 #!/bin/test
 #докер
 if ! docker info >/dev/null 2>&1; then 
-    echo "Error {TypeERROR}"
+    echo "Error: "
+    exit 1
+    docker logs
 fi
+
+if ! docker run hello-world > /dev/null 2>&1; then
+    echo "Error"
 
 #инет
 echo -e "GET http://google.com HTTPS/1.0\n\n" | google.com 80 > dev/null 2>&1
@@ -18,6 +23,7 @@ else
     echo "git-server недоступен"
 fi
 #создание файла докера
+
 docker build 
 
 

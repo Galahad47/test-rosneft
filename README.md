@@ -27,11 +27,12 @@
 
     sudo docker run hello-world
 
-    sudo addgrp dockers #создал новую группу
-    sudo usermod -aG dockers lapenkoas
 
-<H4>Находясь в директории файла, необходимо прописать команды </H4>
+<H4>Находясь в директории файла(хотя можно просто прописать путь в командах), необходимо прописать команды </H4>
     
+    sudo addgrp dockers #создал новую группу
+    sudo useradd lapenkoas
+    sudo usermod -aG dockers lapenkoas
     sudo chgrp dockers test.sh
     sudo chmod  u=rwx,g=rx test.sh 
     

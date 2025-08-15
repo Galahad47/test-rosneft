@@ -1,16 +1,16 @@
 # Часть 1 - Основы
 
 <H4>Если ВМ совсем новая, то нужно установить необходимые для работы библиотеки.Тут мы просто создали группу и добавили в нее юзера, у файла $test.sh предварительно заданы права на r+x (чтение и исполнение)</H4>
-    sudo apt install update -y && sudo apt install upgrade -y
+    sudo apt update -y && sudo apt upgrade -y
 
     sudo apt install openssh-server
     sudo apt install ufw -y
-    sudo apt install update -y && sudo apt install upgrade -y
+    sudo apt install update -y && sudo apt upgrade -y
 
     sudo apt install curl -y
-    sudo apt install update -y && sudo apt install upgrade -y
+    sudo apt update -y && sudo apt upgrade -y
 
-    sudo apt-get update
+    sudo apt update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc

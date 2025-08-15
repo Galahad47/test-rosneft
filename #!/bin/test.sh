@@ -4,8 +4,9 @@ if ! docker info >/dev/null 2>&1; then
     echo "Error {TypeERROR}"
 fi
 
-echo -e "GET http://google.com HTTPS/1.0\n\n" | google.com 80 > dev/null 2>&1
 #инет
+echo -e "GET http://google.com HTTPS/1.0\n\n" | google.com 80 > dev/null 2>&1
+
 if [$? -eq 0]; then
     echo 'Online'
 else

@@ -5,4 +5,4 @@ then echo "Error {TypeERROR}"
 exit 1
 fi
 
-if 
+if ! ping 8.8.8.8 >/dev/ping_null;

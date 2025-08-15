@@ -35,7 +35,7 @@
     sudo usermod -aG dockers lapenkoas
     sudo chgrp dockers test.sh
     sudo chmod  u=rwx,g=rx test.sh
-    
+
     
 # Часть 2 - Закрепление. 
 <H3>
@@ -58,7 +58,7 @@
 # Часть 3 - Во все тяжкие
 
 <H4>
-    После описание выше, решил натсроить дашборд. 
+    После описание выше, решил настроить дашборд.
 </H4>
 
 

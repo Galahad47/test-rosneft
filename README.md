@@ -3,7 +3,7 @@
 <H4>Если ВМ совсем новая, то нужно установить необходимые для работы библиотеки.Тут мы просто создали группу и добавили в нее юзера, у файла $test.sh предварительно заданы права на r+x (чтение и исполнение)</H4>
     sudo apt install update -y && sudo apt install upgrade -y
 
-    sudo apt install ssh-server
+    sudo apt install openssh-server
     sudo apt install ufw -y
     sudo apt install update -y && sudo apt install upgrade -y
 

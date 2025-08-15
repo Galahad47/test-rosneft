@@ -1,9 +1,7 @@
-#!/bin/test
 #докер
 if ! docker info >/dev/null 2>&1; then 
-    echo "Error: "
+    echo "Error:";sudo systemctl status docker
     exit 1
-    docker logs
 fi
 
 if ! docker run hello-world > /dev/null 2>&1; then

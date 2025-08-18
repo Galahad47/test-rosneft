@@ -17,6 +17,24 @@ else
         exit 1
 fi
 
-docker build https://github.com/Lissy93/dashy
+mkdir -p ~/dashy && cd ~/dashy && curl -o config.yml https://raw.githubusercontent.com/Lissy93/dashy/main/config.yml
+docker run  -d --name dashy -p 8080:80 -v ~/dashy/config.yml:/app/config.yml lissy93/dashy
+timeout 10s
+docker save -o test_rosneft.tar dashy
+timeout 5s
+docker stop $(docker ps -qa) && docker rm $(docker ps -qa)
+timeout 10s
+docker load -i test_rosneft.tar --build && docker images
 
+cat > docker-compose.yml <<EOF
+version: '3'
+services:
+    dashy:
+        image: dashy-app
+        container_name: dashy
+        ports: '8080:80'
+        restart: unleess-stopped
+EOF
+
+docker-compose up -d --build && curl -I http://localhost:8080
 

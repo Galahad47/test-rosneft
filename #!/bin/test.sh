@@ -82,6 +82,8 @@ services:
       - "$CONFIG_FILE:/app/public/conf.yml"
       restart: unless-stopped
 EOF
+
+
 # <-- запуску -->
 echo -e "\e[33mЗапуск контейнера\e[0m" && docker compose up -d || exit 1
 echo -e "\e[33mПроверка работы\e[0m" && sleep 10

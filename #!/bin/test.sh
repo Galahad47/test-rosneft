@@ -72,7 +72,7 @@ cat > docker-compose.yml <<EOF
 version: '3.8'
 services:
   dashy:
-    container_name: dashy-app
+    container_name: dashy
     image: dashy-app
     ports:
       - "8080:80"

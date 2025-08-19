@@ -1,5 +1,5 @@
 #!/bin/bash
-CLONE_DIR = "dashy-src";REPO = "https://github.com/Lissy93/dashy.git"
+CLONE_DIR = "dashy-src";REPO = "https://github.com/Lissy93/dashy.git";TAR_FILE="../dashy.tar"
 if ! systemctl is-active --quiet docker; then
     echo "Докер не запущен для просмотра необходимо просмотреть systemctl status docker"
     systemctl status docker
@@ -54,5 +54,15 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/docker/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 EOF
+
+echo -e "\e[33mСборка Docker   \e[0m" && docker build -t dashy-app . || {
+        echo -e "\e[31mПроизошла ошибка сборки\e[0m"
+        exit 1
+}
+echo -e "\e[33mСохранение образа началось\e[0m" && docker save -o "$TAR_FILE" dashy-app || exit 1
+
+cd .. || exit 1 
+echo -e "\e[33mВыполняется очистка\e[0m" && docker system prune -a -f
+
 
 

@@ -72,6 +72,7 @@ cat > docker-compose.yml <<EOF
 version: '3.8'
 services:
   dashy:
+    container_name: dashy-app
     image: dashy-app
     ports:
       - "8080:80"
@@ -87,6 +88,6 @@ if curl -sI http://localhost:8080 | grep -q "200 OK"; then
     echo -e "Конфиг: \e[35m$CONFIG_FILE\e[0m"
 else
     echo -e "\e[31mОШИБКА: Приложение не запустилось\e[0m"
-    docker logs dashy
+    docker logs dashy-app
     exit 1
 fi

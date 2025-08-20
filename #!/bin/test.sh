@@ -70,9 +70,9 @@ cd .. || exit 1
 echo -e "\e[33mВыполняется очистка\e[0m" && docker system prune -a -f
 echo -e "\e[33mЗагрузка Docker\e[0m" && docker load -i "$TAR_FILE" || exit 1
 
-CONFIG_DIR="$HOME/dashy-config";CONFIG_FILE="$CONFIG_DIR/config.yml"
+CONFIG_DIR="$HOME/dashy-config";CONFIG_FILE="$CONFIG_DIR/conf.yml"
 mkdir -p "$CONFIG_DIR"
-[ ! -f "$CONFIG_FILE" ] && curl -sL "$REPO/raw/master/config.yml" -o "$CONFIG_FILE"
+[ ! -f "$CONFIG_FILE" ] && curl -sL "$REPO/raw/master/public/conf.yml" -o "$CONFIG_FILE"
 
 cat > docker-compose.yml <<EOF
 version: '3.8'
@@ -94,6 +94,6 @@ if curl -sI http://localhost:8080 | grep -q "200 OK"; then
     echo -e "Конфиг: \e[35m$CONFIG_FILE\e[0m"
 else
     echo -e "\e[31mОШИБКА: Приложение не запустилось\e[0m"
-    docker logs dashy_app
+    docker logs dashy
     exit 1
 fi

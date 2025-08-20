@@ -51,6 +51,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --silent
 COPY . .
 RUN npm run build
+RUN npx browserslist@latest --update-db
 
 FROM nginx:1.23-alpine
 RUN rm -f /docker-entrypoint.d/30-tune-worker-processes.sh && \

@@ -61,7 +61,7 @@ COPY --from=builder /app/docker/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 EOF
 
-echo -e "\e[33mСборка Docker\e[0m" && docker build -t dashy_app . || {
+echo -e "\e[33mСборка Docker\e[0m" && docker build -t dashy_app:latest . || {
         echo -e "\e[31mПроизошла ошибка сборки\e[0m"
         exit 1
 }
@@ -69,13 +69,14 @@ echo -e "\e[33mСохранение образа началось\e[0m" && docke
 
 cd .. || exit 1 
 if [! -e *.tar]; then
-    echo -e "\e[31mОшибка не обнаружен dashy.tar\e[0m"
+    echo -e "\e[31mОшибка - не обнаружен dashy.tar\e[0m"
     exit 1
 else
-    echo -e "\e[33mВыполняется очистка\e[0m" && docker system prune -a -f
+    echo -e "\e[32mФайл найден\e[0m" && sleep 5s
+    echo -e "\e[33mВыполняется очистка\e[0m" && docker rm -f $(docker ps -aq) 2>/dev/null || true && docker image ls -q | grep -v $(docker image ls --format ""{{.ID}}  --filter=reference='dashy_app:latest') | xargs -r docker rmi -f && docker system prune -f
 fi
 
-echo -e "\e[33mЗагрузка Docker\e[0m" && docker load -i "$TAR_FILE" || exit 1
+echo -e "\e[33mЗагрузка Docker\e[0m" && docker load -i "$TAR_FILE" && docker tag $(docker images --format "{{.ID}}" | head -1) dashy_app:latest || exit 1
 
 CONFIG_DIR="$HOME/dashy-config";CONFIG_FILE="$CONFIG_DIR/conf.yml"
 mkdir -p "$CONFIG_DIR"
@@ -86,7 +87,7 @@ version: '3.8'
 services:
   dashy:
     container_name: dashy
-    image: dashy_app
+    image: dashy_app:latest
     ports:
       - "8080:80"
     volumes:
@@ -96,6 +97,7 @@ EOF
 
 echo -e "\e[33mЗапуск контейнера\e[0m" && docker compose up -d || exit 1
 echo -e "\e[33mПроверка работы\e[0m" && sleep 10
+
 if curl -sI http://localhost:8080 | grep -q "200 OK"; then
     echo -e "\e[32mУСПЕХ: Приложение доступно на \e[4mhttp://localhost:8080\e[0m"
     echo -e "Конфиг: \e[35m$CONFIG_FILE\e[0m"

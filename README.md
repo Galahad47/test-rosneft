@@ -68,10 +68,10 @@
 <H4>
     Пример того, что всё открылось на localhost:8080
 </H4>
-
     <img width="1864" height="1001" alt="image" src="https://github.com/user-attachments/assets/088cd73a-2f29-41dc-9047-988ed341d94d" />
 
 <H5>"Тут будет создано описание и пример дашборда"</H5>
+
 
 
 

@@ -68,7 +68,13 @@ echo -e "\e[33mСборка Docker\e[0m" && docker build -t dashy_app . || {
 echo -e "\e[33mСохранение образа началось\e[0m" && docker save -o "$TAR_FILE" dashy_app || exit 1
 
 cd .. || exit 1 
-echo -e "\e[33mВыполняется очистка\e[0m" && docker system prune -a -f
+if ! -e *.tar; then
+    echo -e "\e[31mОшибка не обнаружен dashy.tar\e[0m"
+    exit 1
+else
+    echo -e "\e[33mВыполняется очистка\e[0m" && docker system prune -a -f
+fi
+
 echo -e "\e[33mЗагрузка Docker\e[0m" && docker load -i "$TAR_FILE" || exit 1
 
 CONFIG_DIR="$HOME/dashy-config";CONFIG_FILE="$CONFIG_DIR/conf.yml"

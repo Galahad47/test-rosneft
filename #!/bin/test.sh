@@ -68,7 +68,7 @@ echo -e "\e[33mСборка Docker\e[0m" && docker build -t dashy_app . || {
 echo -e "\e[33mСохранение образа началось\e[0m" && docker save -o "$TAR_FILE" dashy_app || exit 1
 
 cd .. || exit 1 
-if ! -e *.tar; then
+if [! -e *.tar]; then
     echo -e "\e[31mОшибка не обнаружен dashy.tar\e[0m"
     exit 1
 else

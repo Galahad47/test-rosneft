@@ -1,6 +1,6 @@
 # Часть 1 - Основы
 
-<H4>Если ВМ совсем новая, то нужно установить необходимые для работы библиотеки.Тут мы просто создали группу и добавили в нее юзера, у файла $test.sh предварительно заданы права на r+x (чтение и исполнение)</H4>
+<H4>Если ВМ совсем новая, то нужно установить необходимый для работы фрэйм.</H4>
 
     sudo apt update -y && sudo apt upgrade -y
 
@@ -10,6 +10,7 @@
 
     sudo apt install curl -y
     sudo apt update -y && sudo apt upgrade -y
+<H4>Docker и приключения с ним</H4>
 
     sudo apt update
     sudo apt-get install ca-certificates curl -y
@@ -24,11 +25,13 @@
     sudo apt-get update
 
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+<H4>Проверка что он работает вообще</H4>
+<!-- Тут оставлю пасхалку, я на самом деле больше 3 дней подряд сижу и чисто баги свои же чищу, сейчас работает всё стабильно -->
 
     sudo docker run hello-world
 
 
-<H4>Находясь в директории файла(хотя можно просто прописать путь в командах), необходимо прописать команды </H4>
+<H4>Тут мы просто создали группу и добавили в нее юзера, у файла $test.sh предварительно заданы права на r+x у создателя будут rwx права, в целом можно поменять </H4>
     
     sudo addgrp dockers #создал новую группу
     sudo useradd lapenkoas
@@ -71,6 +74,7 @@
     <img width="1864" height="1001" alt="image" src="https://github.com/user-attachments/assets/088cd73a-2f29-41dc-9047-988ed341d94d" />
 
 <H5>"Тут будет создано описание и пример дашборда"</H5>
+
 
 
 

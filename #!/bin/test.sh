@@ -1,10 +1,9 @@
 #!/bin/bash
-sudo addgr
-
-
-
 
 CLONE_DIR="dashy-src";REPO="https://github.com/Lissy93/dashy.git";TAR_FILE="dashy.tar"
+
+docker stop dashy 2>/dev/null || true; docker rm dashy 2>/dev/null || true
+
 if ! systemctl is-active --quiet docker; then
     echo "Докер не запущен для просмотра необходимо просмотреть systemctl status docker"
     systemctl status docker
@@ -61,11 +60,11 @@ COPY --from=builder /app/docker/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 EOF
 
-echo -e "\e[33mСборка Docker\e[0m" && docker build -t dashy-app . || {
+echo -e "\e[33mСборка Docker\e[0m" && docker build -t dashy_app . || {
         echo -e "\e[31mПроизошла ошибка сборки\e[0m"
         exit 1
 }
-echo -e "\e[33mСохранение образа началось\e[0m" && docker save -o "$TAR_FILE" dashy-app || exit 1
+echo -e "\e[33mСохранение образа началось\e[0m" && docker save -o "$TAR_FILE" dashy_app || exit 1
 
 cd .. || exit 1 
 echo -e "\e[33mВыполняется очистка\e[0m" && docker system prune -a -f
@@ -80,7 +79,7 @@ version: '3.8'
 services:
   dashy:
     container_name: dashy
-    image: dashy-app
+    image: dashy_app
     ports:
       - "8080:80"
     volumes:
@@ -95,6 +94,6 @@ if curl -sI http://localhost:8080 | grep -q "200 OK"; then
     echo -e "Конфиг: \e[35m$CONFIG_FILE\e[0m"
 else
     echo -e "\e[31mОШИБКА: Приложение не запустилось\e[0m"
-    docker logs dashy-app
+    docker logs dashy_app
     exit 1
 fi

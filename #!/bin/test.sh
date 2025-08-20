@@ -1,4 +1,9 @@
 #!/bin/bash
+sudo addgr
+
+
+
+
 CLONE_DIR="dashy-src";REPO="https://github.com/Lissy93/dashy.git";TAR_FILE="dashy.tar"
 if ! systemctl is-active --quiet docker; then
     echo "Докер не запущен для просмотра необходимо просмотреть systemctl status docker"
@@ -49,6 +54,8 @@ COPY . .
 RUN npm run build
 
 FROM nginx:1.23-alpine
+RUN rm -f /docker-entrypoint.d/30-tune-worker-processes.sh && \
+    rm -f /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/docker/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
